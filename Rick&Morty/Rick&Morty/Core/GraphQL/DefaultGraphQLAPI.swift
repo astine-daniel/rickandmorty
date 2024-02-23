@@ -38,7 +38,7 @@ private struct GraphQLResponse<T: Decodable>: Decodable {
     }
 
     private struct Data: Decodable {
-        let value: T
+        let results: T
     }
 
     private struct Error: Decodable {
@@ -50,8 +50,8 @@ private struct GraphQLResponse<T: Decodable>: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        if let data = try container.decodeIfPresent(Data.self, forKey: .data) {
-            response = .success(data.value)
+        if let data = try container.decodeIfPresent([String: T].self, forKey: .data), let values = data.values.first {
+            response = .success(values)
         } else if let errors = try container.decodeIfPresent([Error].self, forKey: .errors), !errors.isEmpty {
             response = .failure(.errors(messages: errors.map { $0.message }))
         } else {

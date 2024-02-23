@@ -1,15 +1,18 @@
+import Foundation
 import SwiftUI
 
 struct CharacterCardView: View {
+    let character: Character
+
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")) { content in
+            AsyncImage(url: character.image) { content in
                 content.resizable()
             } placeholder: {
                 ProgressView()
             }
             .overlay(
-                Text("Rick Sanchez")
+                Text(character.name)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(.white)
@@ -26,5 +29,11 @@ struct CharacterCardView: View {
 }
 
 #Preview {
-    CharacterCardView()
+    CharacterCardView(
+        character: Character(
+            id: "0",
+            name: "Rick Sanchez",
+            image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")
+        )
+    )
 }
