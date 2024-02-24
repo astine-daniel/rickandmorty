@@ -11,22 +11,24 @@ struct CharacterCardView: View {
     }
 
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             AsyncImage(url: image) { content in
-                content.resizable()
+                content
+                    .resizable()
+                    .frame(minWidth: 165.0, minHeight: 250.0)
+                    .aspectRatio(contentMode: .fit)
             } placeholder: {
                 ProgressView()
             }
-            .overlay(
-                Text(name)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .foregroundStyle(.white)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .background(.black.opacity(0.7))
-                , alignment: .bottom
-            )
+            .frame(minWidth: 165.0, minHeight: 250.0)
+
+            Text(name)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .font(.headline)
+                .lineLimit(1)
+                .background(.black.opacity(0.7))
         }
         .aspectRatio(CGSizeMake(2.0, 3.0), contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 10.0))

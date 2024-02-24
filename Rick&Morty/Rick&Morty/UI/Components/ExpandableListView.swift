@@ -29,7 +29,9 @@ struct ExpandableListView<Item, Content>: View where Item: Identifiable, Content
             if canExpand {
                 Button(
                     action: {
-                        isExpanded.toggle()
+                        withAnimation {
+                            isExpanded.toggle()
+                        }
                     },
                     label: {
                         Text(buttonText)

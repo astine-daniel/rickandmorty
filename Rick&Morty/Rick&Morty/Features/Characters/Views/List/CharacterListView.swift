@@ -6,17 +6,27 @@ struct CharacterListView: View {
     @State var characters: [Character] = []
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, content: {
-                ForEach(characters) { character in
-                    CharacterCardView(image: character.image, name: character.name)
-                }
-            })
-            .padding()
-        }
-        .navigationTitle("Characters")
-        .task {
-            await fetchCharacters()
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, content: {
+                    ForEach(characters) { character in
+                        NavigationLink(
+                            value: character,
+                            label: {
+                                CharacterCardView(image: character.image, name: character.name)
+                            }
+                        )
+                    }
+                })
+                .padding()
+            }
+            .navigationTitle("Characters")
+            .navigationDestination(for: Character.self) { character in
+                CharacterView(characterId: character.id, name: character.name)
+            }
+            .task {
+                await fetchCharacters()
+            }
         }
     }
 
@@ -41,7 +51,5 @@ struct CharacterListView: View {
 // MARK: Preview
 
 #Preview {
-    NavigationStack {
-        CharacterListView()
-    }
+    CharacterListView()
 }

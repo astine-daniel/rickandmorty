@@ -16,7 +16,11 @@ struct DefaultGraphQLAPI: GraphQLAPI {
         let request = try operation.asURLRequest()
 
         let (data, _) = try await session.data(for: request, delegate: nil)
-        let response = try JSONDecoder().decode(GraphQLResponse<Response>.self, from: data)
+
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        let response = try decoder.decode(GraphQLResponse<Response>.self, from: data)
 
         switch response.response {
         case let .success(value):
