@@ -25,6 +25,8 @@ struct CharactersQuery: GraphQLOperation {
         """
     }
 
+    // MARK: Private
+
     private let page: Int
     private let operation = "GetCharacters"
 }

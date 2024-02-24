@@ -1,14 +1,15 @@
 import SwiftUI
 
+// MARK: - CharacterListView
+
 struct CharacterListView: View {
-    let api = DefaultGraphQLAPI()
     @State var characters: [Character] = []
 
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, content: {
                 ForEach(characters) { character in
-                    CharacterCardView(character: character)
+                    CharacterCardView(image: character.image, name: character.name)
                 }
             })
             .padding()
@@ -18,6 +19,10 @@ struct CharacterListView: View {
             await fetchCharacters()
         }
     }
+
+    // MARK: Private
+
+    private let api = DefaultGraphQLAPI()
 
     @MainActor
     private func fetchCharacters() async {
@@ -32,6 +37,8 @@ struct CharacterListView: View {
 
     private let columns: [GridItem] = [GridItem(), GridItem()]
 }
+
+// MARK: Preview
 
 #Preview {
     NavigationStack {
