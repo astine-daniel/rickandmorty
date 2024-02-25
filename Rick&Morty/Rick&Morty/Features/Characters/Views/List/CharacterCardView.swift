@@ -16,11 +16,12 @@ struct CharacterCardView: View {
                 content
                     .resizable()
                     .frame(minWidth: 165.0, minHeight: 250.0)
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(CGSizeMake(2.0, 3.0), contentMode: .fit)
             } placeholder: {
                 ProgressView()
             }
             .frame(minWidth: 165.0, minHeight: 250.0)
+            .aspectRatio(CGSizeMake(2.0, 3.0), contentMode: .fit)
 
             Text(name)
                 .padding()
@@ -30,7 +31,6 @@ struct CharacterCardView: View {
                 .lineLimit(1)
                 .background(.black.opacity(0.7))
         }
-        .aspectRatio(CGSizeMake(2.0, 3.0), contentMode: .fit)
         .clipShape(RoundedRectangle(cornerRadius: 10.0))
         .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
     }

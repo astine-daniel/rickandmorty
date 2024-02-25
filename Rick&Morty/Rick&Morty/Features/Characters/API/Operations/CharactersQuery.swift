@@ -19,6 +19,9 @@ struct CharactersQuery: GraphQLOperation {
                     id,
                     name,
                     image
+                },
+                info {
+                    next
                 }
             }
         }
