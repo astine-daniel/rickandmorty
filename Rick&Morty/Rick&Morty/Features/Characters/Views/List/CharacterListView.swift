@@ -9,6 +9,11 @@ struct CharacterListView<ViewModel: CharacterListViewModel>: View {
 
     var body: some View {
         content
+            .onOrientationChanged { orientation in
+                withAnimation {
+                    self.orientation = orientation
+                }
+            }
             .animation(.default, value: viewModel.state)
             .animation(.default, value: viewModel.characters)
             .task {
@@ -19,9 +24,17 @@ struct CharacterListView<ViewModel: CharacterListViewModel>: View {
 
     // MARK: Private
 
-    private let columns: [GridItem] = [GridItem(), GridItem()]
-
     @StateObject private var viewModel: ViewModel
+    @State private var orientation: UIDeviceOrientation = UIDevice.current.orientation
+
+    private var columns: [GridItem] {
+        switch orientation {
+        case .landscapeLeft, .landscapeRight:
+            return [GridItem(), GridItem()]
+        default:
+            return [GridItem()]
+        }
+    }
 
     @ViewBuilder
     private var content: some View {
@@ -43,7 +56,7 @@ struct CharacterListView<ViewModel: CharacterListViewModel>: View {
                         NavigationLink(
                             value: character,
                             label: {
-                                CharacterCardView(image: character.image, name: character.name)
+                                CharacterListRow(image: character.image, name: character.name)
                                     .onAppear {
                                         guard viewModel.shouldFetchMoreCharacters(currentIndex: index) else { return }
                                         Task {
