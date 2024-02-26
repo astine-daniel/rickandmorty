@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - HTTPMethod
 
-enum HTTPMethod: String {
+enum HTTPMethod: String, CaseIterable {
     case get = "GET"
     case head = "HEAD"
     case post = "POST"

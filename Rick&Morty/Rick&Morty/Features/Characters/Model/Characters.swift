@@ -1,7 +1,7 @@
 // MARK: - Characters
 
-struct Characters: Decodable {
-    struct Info: Decodable {
+struct Characters: Hashable, Decodable {
+    struct Info: Hashable, Decodable {
         let next: Int?
     }
 

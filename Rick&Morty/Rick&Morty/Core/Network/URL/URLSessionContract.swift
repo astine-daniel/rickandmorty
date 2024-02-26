@@ -5,7 +5,7 @@ import Foundation
 protocol URLSessionContract {
     func data(
         for request: URLRequest,
-        delegate: (URLSessionTaskDelegate)?
+        delegate: URLSessionTaskDelegate?
     ) async throws -> (Data, URLResponse)
 }
 
