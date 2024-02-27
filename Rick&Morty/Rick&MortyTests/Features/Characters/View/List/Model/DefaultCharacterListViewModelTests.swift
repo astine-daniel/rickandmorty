@@ -59,6 +59,8 @@ final class DefaultCharacterListViewModelTests: XCTestCase {
         assert(sut.characters, equals: expectedCharacters)
     }
 
+    // MARK: Private
+
     private func makeCharactersResponse(firstCharacterIndex: Int = 1, numberOfCharacters: Int = 10, nextPage: Int? = 2) -> Characters {
         Characters(
             results: makeCharactersList(firstIndex: firstCharacterIndex, total: numberOfCharacters),

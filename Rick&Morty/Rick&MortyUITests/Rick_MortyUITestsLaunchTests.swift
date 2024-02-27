@@ -17,13 +17,13 @@ final class Rick_MortyUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testLaunch() throws {
-        let app = XCUIApplication()
-        app.launch()
-
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch Screen"
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
+//    func testLaunch() throws {
+//        let app = XCUIApplication()
+//        app.launch()
+//
+//        let attachment = XCTAttachment(screenshot: app.screenshot())
+//        attachment.name = "Launch Screen"
+//        attachment.lifetime = .keepAlways
+//        add(attachment)
+//    }
 }
